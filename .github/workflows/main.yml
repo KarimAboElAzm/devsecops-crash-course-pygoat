@@ -29,14 +29,22 @@ jobs:
       # Fetch project source with GitHub Actions Checkout. Use either v3 or v4.
       - uses: actions/checkout@v4
       # Run the "semgrep ci" command on the command line of the docker image.
-      - run: semgrep scan --help
-      - run: semgrep scan --no-force-color --config auto --output semgrep.output
+      # - run: semgrep scan --help
+      # - run: semgrep scan --no-force-color --config auto --output semgrep.output
 
-      - name: Upload Semgrep Report
-        uses: actions/upload-artifact@v4
+      - name: Run Semgrep
+        run: semgrep scan --no-force-color --config=auto --sarif --output=semgrep.sarif
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          name: semgrep.output
-          path: semgrep.output
+          sarif_file: semgrep.sarif
+
+      # - name: Upload Semgrep Report
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: semgrep.output
+      #     path: semgrep.output
   # sast_scan:
   #   name: Run Bandit Scan
   #   runs-on: ubuntu-latest
