@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       # Run the "semgrep ci" command on the command line of the docker image.
       - run: semgrep scan --help
-      - run: semgrep scan --config auto
+      - run: semgrep scan --force-color --config auto
   # sast_scan:
   #   name: Run Bandit Scan
   #   runs-on: ubuntu-latest
