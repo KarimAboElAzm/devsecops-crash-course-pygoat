@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       # Run the "semgrep ci" command on the command line of the docker image.
       - run: semgrep scan --help
-      - run: semgrep scan --force-color --config auto --output semgrep.output
+      - run: semgrep scan --no-force-color --config auto --output semgrep.output
 
       - name: Upload Semgrep Report
         uses: actions/upload-artifact@v4
